@@ -1,0 +1,175 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "studentInfo": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "id": { "type": "string" },
+        "expectedGradTerm": { "type": "string" },
+        "catalogYear": { "type": "string" },
+        "plans": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["name", "id", "expectedGradTerm", "catalogYear", "plans"]
+    },
+    "academicSummary": {
+      "type": "object",
+      "properties": {
+        "totalCredits": {
+          "type": "object",
+          "properties": {
+            "required": { "type": "number" },
+            "earned": { "type": "number" },
+            "inProgress": { "type": "number" },
+            "needed": { "type": "number" }
+          },
+          "required": ["required", "earned", "inProgress", "needed"]
+        },
+        "cumulativeGPA": { "type": "number" },
+        "institutionalGPA": { "type": "number" }
+      },
+      "required": ["totalCredits", "cumulativeGPA", "institutionalGPA"]
+    },
+    "graduationRequirements": {
+      "type": "object",
+      "properties": {
+        "overallStatus": { "type": "string" },
+        "degreeCredit": {
+          "type": "object",
+          "properties": {
+            "required": { "type": "number" },
+            "earned": { "type": "number" },
+            "inProgress": { "type": "number" },
+            "needed": { "type": "number" }
+          },
+          "required": ["required", "earned", "inProgress", "needed"]
+        },
+        "upperDivisionCredits": {
+          "type": "object",
+          "properties": {
+            "required": { "type": "number" },
+            "earned": { "type": "number" },
+            "inProgress": { "type": "number" },
+            "needed": { "type": "number" }
+          },
+          "required": ["required", "earned", "inProgress", "needed"]
+        }
+      },
+      "required": ["overallStatus", "degreeCredit", "upperDivisionCredits"]
+    },
+    "generalEducation": {
+      "type": "object",
+      "properties": {
+        "overallStatus": { "type": "string" },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "status": { "type": "string" },
+              "requiredCredits": { "type": "number" },
+              "completedCredits": { "type": "number" }
+            },
+            "required": ["name", "status", "requiredCredits", "completedCredits"]
+          }
+        }
+      },
+      "required": ["overallStatus", "categories"]
+    },
+    "major": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "overallStatus": { "type": "string" },
+        "gpa": { "type": "number" },
+        "requirements": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "status": { "type": "string" },
+              "courses": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "code": { "type": "string" },
+                    "name": { "type": "string" },
+                    "credits": { "type": "number" },
+                    "grade": { "type": "string" },
+                    "term": { "type": "string" }
+                  },
+                  "required": ["code", "name", "credits", "grade", "term"]
+                }
+              }
+            },
+            "required": ["name", "status", "courses"]
+          }
+        }
+      },
+      "required": ["name", "overallStatus", "gpa", "requirements"]
+    },
+    "minor": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "overallStatus": { "type": "string" },
+        "gpa": { "type": "number" },
+        "requirements": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "status": { "type": "string" },
+              "courses": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "code": { "type": "string" },
+                    "name": { "type": "string" },
+                    "credits": { "type": "number" },
+                    "grade": { "type": "string" },
+                    "term": { "type": "string" }
+                  },
+                  "required": ["code", "name", "credits", "grade", "term"]
+                }
+              }
+            },
+            "required": ["name", "status", "courses"]
+          }
+        }
+      },
+      "required": ["name", "overallStatus", "gpa", "requirements"]
+    },
+    "inProgressCourses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": { "type": "string" },
+          "name": { "type": "string" },
+          "credits": { "type": "number" },
+          "term": { "type": "string" }
+        },
+        "required": ["code", "name", "credits", "term"]
+      }
+    }
+  },
+  "required": [
+    "studentInfo",
+    "academicSummary",
+    "graduationRequirements",
+    "generalEducation",
+    "major",
+    "minor",
+    "inProgressCourses"
+  ]
+}
