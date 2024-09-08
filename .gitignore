@@ -1,6 +1,6 @@
 venv
 output/*
-build/*
+serve/*
 
 
 

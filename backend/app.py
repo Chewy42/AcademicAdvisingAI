@@ -9,6 +9,9 @@ from utils.extract_academic_progress import extract_academic_progress
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
+# Get the current script's directory
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+
 @app.route('/')
 def index():
     return "Hello World"
@@ -21,7 +24,7 @@ def upload_pdf():
     if file.filename == '':
         return jsonify({"error": "No selected file"}), 400
     if file and file.filename.lower().endswith('.pdf'):
-        output_folder = 'output'
+        output_folder = os.path.join(CURRENT_DIR, 'output')
         os.makedirs(output_folder, exist_ok=True)
         
         pdf_path = os.path.join(output_folder, file.filename)
