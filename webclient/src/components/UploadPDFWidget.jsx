@@ -56,7 +56,7 @@ function UploadPDFWidget({ onFileUpload }) {
     <form className="md:w-[704px] md:h-[396px] sm:w-[100%] sm:h-[360px] m-auto -translate-y-20 rounded-[16px] shadow-lg md:hover:shadow-2xl linear-anim-transitions border-[2px] relative">
       <div className="flex flex-col justify-center align-top w-full h-full">
         <div className="text-center mb-2 hover:cursor-pointer">
-          <h1 className="text-[24px] select-none">Step 1</h1>
+          <h1 className="text-[24px] select-none">Step 999</h1>
           <h2 className="text-[16px] text-gray-500 select-none">
             Upload your{" "}
             <span className="text-black font-semibold">
