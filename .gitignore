@@ -1,7 +1,8 @@
 venv
 output/*
 serve/*
-
+*.pdf
+*.txt
 
 
 node_modules

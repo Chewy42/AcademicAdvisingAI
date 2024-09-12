@@ -1,5 +1,7 @@
 import re
 import json
+import pdfplumber
+from datetime import datetime
 
 def extract_section(text, section_name, end_marker=None):
     if end_marker:
@@ -109,6 +111,7 @@ def extract_academic_progress(text):
 
 if __name__ == "__main__":
     import sys
+    import os
     
     if len(sys.argv) != 2:
         print("Usage: python extract_academic_progress.py <input_file>")
@@ -116,9 +119,37 @@ if __name__ == "__main__":
     
     input_file = sys.argv[1]
     
-    with open(input_file, 'r') as f:
-        text = f.read()
+    # Extract text from PDF
+    text = ""
+    with pdfplumber.open(input_file) as pdf:
+        for page in pdf.pages:
+            text += page.extract_text()
     
+    # Generate timestamp
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    
+    # Ensure the output directory exists
+    output_dir = "output"
+    os.makedirs(output_dir, exist_ok=True)
+    
+    # Save raw extracted text to a .txt file
+    txt_filename = f"extracted_text_{timestamp}.txt"
+    txt_path = os.path.join(output_dir, txt_filename)
+    with open(txt_path, 'w', encoding='utf-8') as f:
+        f.write(text)
+    
+    print(f"Extracted text saved to {txt_path}")
+    
+    # Process the extracted text
     data = extract_academic_progress(text)
     
+    # Save processed data to a JSON file
+    json_filename = f"academic_progress_{timestamp}.json"
+    json_path = os.path.join(output_dir, json_filename)
+    with open(json_path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=2)
+    
+    print(f"Processed data saved to {json_path}")
+    
+    # Optionally, still print the processed data to console
     print(json.dumps(data, indent=2))
